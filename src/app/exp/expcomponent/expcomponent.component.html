@@ -1,0 +1,18 @@
+<div class="container">
+  <h3>Forms</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Questions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let form of forms">
+        <td>{{ form.title }}</td>
+        <td>{{ form.questions.length }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

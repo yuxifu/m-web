@@ -1,0 +1,81 @@
+<!--<div class="navbar navbar-inverse navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" type="button" (click)="toggleState()">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a [routerLink]="[brandMenu.path]" class="navbar-brand logo">{{brandMenu.title}}</a>
+    </div>
+    <div class="navbar-collapse collapse in" [ngClass]="{ 'in': isIn }" id="navbar-main">
+      <ul class="nav navbar-nav">
+        <li (click)="isIn = false" *ngFor="let menuItem of menuItems">
+          <a [routerLink]="[menuItem.path]" routerLinkActive="active">{{menuItem.title}}</a>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li (click)="isIn = false" *ngIf="isAdmin()">
+          <a routerLink="admin" routerLinkActive="active">Admin</a>
+        </li>
+        <li (click)="isIn = false" *ngIf="!isLoggedIn()">
+          <a routerLink="signup" routerLinkActive="active">Sign up</a>
+        </li>
+        <li (click)="isIn = false" *ngIf="!isLoggedIn()">
+          <a routerLink="login" routerLinkActive="active">Login</a>
+        </li>
+        <li (click)="isIn = false" *ngIf="isLoggedIn()">
+          <p class="navbar-text">Hello {{ getCurrentUserName() }}</p>
+        </li>
+        <li (click)="isIn = false" *ngIf="isLoggedIn()">
+          <a routerLink="profile" routerLinkActive="active"><span class="glyphicon glyphicon-cog"></span></a>
+        </li>
+        <li (click)="isIn = false" *ngIf="isLoggedIn()">
+          <a routerLink="logout" routerLinkActive="active">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>-->
+
+<md-toolbar color="primary">
+
+  <button md-button [routerLink]="[brandMenu.path]">{{brandMenu.title}}</button>
+  <!-- <md-icon>home</md-icon> -->
+
+  <!-- This fills the remaining space of the current row -->
+  <div *ngFor="let menuItem of menuItems" fxLayout="row" fxShow="false" fxShow.gt-sm>
+    <button md-button [routerLink]="[menuItem.path]" routerLinkActive="active">{{menuItem.title}}</button>
+  </div>
+  <span class="fill-remaining-space"></span>
+  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+    <button md-button *ngIf="isAdmin()" routerLink="admin" routerLinkActive="active">Admin</button>
+    <button md-button *ngIf="!isLoggedIn()" routerLink="signup" routerLinkActive="active">Sign up</button>
+    <button md-button *ngIf="!isLoggedIn()" routerLink="login" routerLinkActive="active">Login</button>
+    <button md-button *ngIf="isLoggedIn()">Hello {{ getCurrentUserName() }}</button>
+    <button md-button *ngIf="isLoggedIn()" routerLink="profile" routerLinkActive="active"><span class="glyphicon glyphicon-cog"></span></button>
+    <button md-button *ngIf="isLoggedIn()" routerLink="logout" routerLinkActive="active">Logout</button>
+  </div>
+
+  <button md-button [md-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+     <md-icon>menu</md-icon>
+    </button>
+
+</md-toolbar>
+<md-menu x-position="before" #menu="mdMenu">
+  <!--<button md-menu-item routerLink="/products">Products</button>
+    <button md-menu-item routerLink="/dashboard">Dashboard</button>
+    <button md-menu-item>Help</button>
+-->
+  <div *ngFor="let menuItem of menuItems">
+    <button md-menu-item [routerLink]="[menuItem.path]">{{menuItem.title}}</button>
+  </div>
+  <button md-menu-item *ngIf="isAdmin()" routerLink="admin">Admin</button>
+  <button md-menu-item *ngIf="!isLoggedIn()" routerLink="signup">Sign up</button>
+  <button md-menu-item *ngIf="!isLoggedIn()" routerLink="login">Login</button>
+  <button md-menu-item *ngIf="isLoggedIn()" routerLink="profile">Profile</button>
+  <button md-menu-item *ngIf="isLoggedIn()" routerLink="logout">Logout</button>
+
+</md-menu>

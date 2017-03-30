@@ -1,0 +1,20 @@
+footer.footer {
+  text-align: center;
+  padding: 70px 0;
+  margin-top: 70px;
+  border-top: 1px solid grey;
+}
+
+.maintext {
+    text-align: center;
+}
+
+.divider-10 {
+  width: 100%;
+  min-height: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+  position: relative;
+  border-bottom: dotted silver 1px
+}

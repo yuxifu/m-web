@@ -1,0 +1,36 @@
+<!--<h3 class="first">Basic</h3>
+<p-dataTable [value]="cars">
+    <p-column field="vin" header="Vin"></p-column>
+    <p-column field="year" header="Year"></p-column>
+    <p-column field="brand" header="Brand"></p-column>
+    <p-column field="color" header="Color"></p-column>
+</p-dataTable>
+-->
+<h3>Data Table</h3>
+<p-dataTable [value]="cars">
+  <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header"></p-column>
+</p-dataTable>
+
+<br>
+<h3>Messages</h3>
+<div class="content-section implementation">
+  <p-messages [value]="msgs"></p-messages>
+
+  <div>
+    <button type="button" pButton (click)="showSuccess()" label="Success" class="ui-button-success"></button>
+    <button type="button" pButton (click)="showInfo()" label="Info" class="ui-button-info"></button>
+    <button type="button" pButton (click)="showWarn()" label="Warn" class="ui-button-warning"></button>
+    <button type="button" pButton (click)="showError()" label="Error" class="ui-button-danger"></button>
+    <button type="button" pButton (click)="showMultiple()" label="Multiple"></button>
+    <button *ngIf="anyMessage()" type="button" pButton (click)="clear()" icon="fa-close" style="float:right" label="Clear"></button>
+  </div>
+</div>
+
+<br>
+<h3>Chart</h3>
+<p-growl [value]="msgs2"></p-growl>
+<p-chart type="line" [data]="data" (onDataSelect)="selectData($event)"></p-chart>
+
+<br>
+<h3>Galleria</h3>
+<p-galleria [images]="images" panelWidth="400" panelHeight="250" [showCaption]="true"></p-galleria>
