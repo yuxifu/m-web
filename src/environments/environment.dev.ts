@@ -3,9 +3,9 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-export const environment = {  
+export const environment = {
   production: false,
-  envName: 'qa',
+  envName: 'dev',
   mockBackend: false,
-  apiRoot: 'http://api1-qa/'
+  apiRoot: 'http://api1-dev/'
 };

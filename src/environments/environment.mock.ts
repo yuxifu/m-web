@@ -5,5 +5,7 @@
 
 export const environment = {
   production: false,
-  envName: 'dev'
+  envName: 'mock',
+  mockBackend: true,
+  apiRoot: 'http://localhost:4200/'
 };
