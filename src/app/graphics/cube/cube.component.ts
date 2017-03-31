@@ -131,7 +131,7 @@ export class CubeComponent implements AfterViewInit {
   /**
    * Update scene after resizing. 
    */
-  public onResize() {
+  public onResize(event: Event) {
     this.camera.aspect = this.getAspectRatio();
     this.camera.updateProjectionMatrix();
 
