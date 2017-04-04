@@ -7,5 +7,5 @@ export const environment = {
   production: false,
   envName: 'dev',
   mockBackend: false,
-  apiRoot: 'http://api1-dev/'
+  apiRoot: 'http://localhost:8000/'
 };
