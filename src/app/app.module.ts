@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule} from "@angular/flex-layout";
 import { } from 'primeng/primeng';
@@ -13,11 +12,9 @@ import {
 } from 'primeng/primeng';
 import 'hammerjs';
 
-// Mock backend
-// No longer user. Replaced by MockBackend
-// Imports for loading & configuring the in-memory web api
-// import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-// import { InMemoryDataService } from './heroes/in-memory-data.service';
+// imports for loading & configuring the in-memory web api
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './heroes/in-memory-data.service';
 
 // app components
 import { AppComponent } from './app.component';
@@ -63,11 +60,13 @@ import { PrimengComponent } from './primeng/primeng/primeng.component';
 import { CarService } from './service/carservice';
 
 // fake backend
-import { MockHttpBackend } from './_helpers/index';
+// ng build --prod failure, see https://github.com/angular/angular-cli/issues/5707
+/*import { MockHttpBackend } from './_helpers/index';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { BaseRequestOptions, Http } from '@angular/http';
 import { MockBackendHeroes } from './_mock-backend/mock-backend.heroes';
 import { MockBackendAuth } from './_mock-backend/mock-backend.auth';
+*/
 
 // auth
 import { AuthGuard } from './_guards/index';
@@ -77,9 +76,9 @@ import { AuthenticationService, UserService } from './_services/index';
 import { FormService } from './_services/form.service';
 
 // named exported function
-export function httpFactory(backend: MockBackend, options: BaseRequestOptions) {
+/*export function httpFactory(backend: MockBackend, options: BaseRequestOptions) {
     return new Http(backend, options);
-}
+}*/
 
 @NgModule({
   imports: [
@@ -87,8 +86,7 @@ export function httpFactory(backend: MockBackend, options: BaseRequestOptions) {
     FlexLayoutModule,
     BrowserModule,
     FormsModule,
-    //HttpModule,
-    //InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
+    InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
     AppRoutingModule,
     OrderListModule, DataTableModule, SharedModule, MessagesModule,
     ButtonModule, GalleriaModule, ChartModule, GrowlModule
@@ -136,6 +134,7 @@ export function httpFactory(backend: MockBackend, options: BaseRequestOptions) {
     AuthenticationService,
     UserService,
 
+    /*
     // providers used to create fake backend
     MockBackend,
     BaseRequestOptions,
@@ -148,6 +147,7 @@ export function httpFactory(backend: MockBackend, options: BaseRequestOptions) {
     },
     MockBackendHeroes,
     MockBackendAuth,
+    */
 
     //
     FormService

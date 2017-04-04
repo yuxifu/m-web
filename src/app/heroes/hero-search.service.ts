@@ -13,8 +13,8 @@ export class HeroSearchService {
 
     search(term: string): Observable<Hero[]> {
         let heroes = this.http
-            .get(`http://localhost:4200/heroes/?name=${term}`)
-            .map(response => response.json() as Hero[]);
+            .get(`app/heroes/?name=${term}`)
+            .map(response => response.json().data as Hero[]);
         console.log(heroes);
         return heroes;
     }
