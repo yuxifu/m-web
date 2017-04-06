@@ -1,37 +1,62 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../../_services/index';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    model: any = {};
     loading = false;
     error = '';
+    data: any;
+    form: FormGroup;
 
     constructor(
         private router: Router,
-        private authenticationService: AuthenticationService) { }
+        private authenticationService: AuthenticationService,
+        private fb: FormBuilder) {
+        this.form = fb.group({
+            // 1st item: default value if any; then validator(s). 
+            'email': [null, Validators.compose([
+                Validators.required,
+                Validators.email])],
+            'password': [null, Validators.compose([
+                Validators.required,
+                Validators.minLength(1),
+                Validators.maxLength(1000)])],
+        })
+    }
 
     ngOnInit() {
         // reset login status
         this.authenticationService.logout();
     }
 
+    submit(value: any) {
+        console.log(value);
+        this.data = value;
+        this.login();
+    }
+
     login() {
         this.loading = true;
-        this.authenticationService.login(this.model.username, this.model.password)
+        this.authenticationService.login(this.data['email'], this.data['password'])
             .subscribe(result => {
-                if (result === true) {
+                console.log(result);
+                if (result.succeed) {
                     this.router.navigate(['/']);
                 } else {
-                    this.error = 'Username or password is incorrect';
                     this.loading = false;
+                    this.error = result.errorMessage;
                 }
+            }, error => {
+                console.log(error);
+                this.loading = false;
+                this.error = error;
             });
     }
 }

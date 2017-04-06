@@ -7,5 +7,5 @@ export const environment = {
   production: false,
   envName: 'qa',
   mockBackend: false,
-  apiRoot: 'http://api1-qa/'
+  apiRoot: 'https://yuxi-m-api.herokuapp.com/'
 };

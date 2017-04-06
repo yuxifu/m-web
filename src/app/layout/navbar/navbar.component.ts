@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
   }
 
   public getCurrentUserName() {
-    return this.authService.getCurrentUserName();
+    return this.authService.getCurrentUserDisplayName();
   }
 
   isIn = false;   // store state

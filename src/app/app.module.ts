@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule} from "@angular/flex-layout";
@@ -59,6 +60,9 @@ import { CubeComponent } from './graphics/cube/cube.component';
 import { PrimengComponent } from './primeng/primeng/primeng.component';
 import { CarService } from './service/carservice';
 
+//
+import { EqualValidator } from './_directives/equal-validator.directive';
+
 // fake backend
 // ng build --prod failure, see https://github.com/angular/angular-cli/issues/5707
 /*import { MockHttpBackend } from './_helpers/index';
@@ -70,7 +74,7 @@ import { MockBackendAuth } from './_mock-backend/mock-backend.auth';
 
 // auth
 import { AuthGuard } from './_guards/index';
-import { AuthenticationService, UserService } from './_services/index';
+import { AuthenticationService, UserService, ApiUrlService } from './_services/index';
 
 //
 import { FormService } from './_services/form.service';
@@ -85,7 +89,9 @@ import { FormService } from './_services/form.service';
     MaterialModule,
     FlexLayoutModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
     AppRoutingModule,
     OrderListModule, DataTableModule, SharedModule, MessagesModule,
@@ -124,6 +130,7 @@ import { FormService } from './_services/form.service';
     CubeComponent,
 
     PrimengComponent,
+    EqualValidator,
   ],
   providers: [
     HeroService,
@@ -133,6 +140,7 @@ import { FormService } from './_services/form.service';
     AuthGuard,
     AuthenticationService,
     UserService,
+    ApiUrlService,
 
     /*
     // providers used to create fake backend

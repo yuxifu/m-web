@@ -1,3 +1,43 @@
-<p>
-  signup works!
-</p>
+<md-card class="form-card">
+  <md-card-content>
+
+    <md-toolbar color="primary" class="center-items">
+      <h4 class="form-title">Create your account</h4>
+    </md-toolbar>
+
+    <form [formGroup]="form" (ngSubmit)="submit(form.value)">
+      <p>
+
+        <md-input-container class="input-full-width" [ngClass]="{'has-error':!form.controls['username'].valid && form.controls['username'].touched}">
+          <input mdInput type="text" placeholder="Username" [formControl]="form.controls['username']">
+        </md-input-container>
+
+        <md-input-container class="input-full-width" [ngClass]="{'has-error':!form.controls['email'].valid && form.controls['email'].touched}">
+          <input mdInput type="text" placeholder="Email" [formControl]="form.controls['email']">
+          <div *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="input-alert">You can't leave this empty.</div>
+          <div *ngIf="form.controls['email'].hasError('email') && form.controls['email'].value" class="input-alert">Email is in wrong format</div>
+        </md-input-container>
+
+        <md-input-container class="input-full-width" [ngClass]="{'has-error':!form.controls['password'].valid && form.controls['password'].touched}">
+          <input mdInput type="password" placeholder="Password" [formControl]="form.controls['password']">
+          <div *ngIf="form.controls['password'].hasError('required') && form.controls['password'].touched" class="input-alert">You can't leave this empty.</div>
+        </md-input-container>
+
+        <md-input-container class="input-full-width" [ngClass]="{'has-error':!form.controls['password2'].valid && form.controls['password2'].touched}">
+          <input mdInput type="password" placeholder="Retype password" [formControl]="form.controls['password2']">
+          <div *ngIf="form.controls['password2'].hasError('required') && form.controls['password2'].touched" class="input-alert">You can't leave this empty.</div>
+          <div *ngIf="form.controls['password'].value && form.controls['password2'].value && form.controls['password2'].touched && form.controls['password2'].value != form.controls['password'].value"
+            class="input-alert">Password mismatch.</div>
+        </md-input-container>
+
+      </p>
+
+      <button md-raised-button color="primary" [disabled]="!form.valid || loading">Submit</button>
+      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+      />
+
+      <div *ngIf="error" class="error-alert">{{error}}</div>
+      
+    </form>
+  </md-card-content>
+</md-card>
