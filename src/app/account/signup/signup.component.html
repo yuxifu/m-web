@@ -10,6 +10,7 @@
 
         <md-input-container class="input-full-width" [ngClass]="{'has-error':!form.controls['username'].valid && form.controls['username'].touched}">
           <input mdInput type="text" placeholder="Username" [formControl]="form.controls['username']">
+          <div *ngIf="form.controls['username'].hasError('required') && form.controls['username'].touched" class="input-alert">You can't leave this empty.</div>
         </md-input-container>
 
         <md-input-container class="input-full-width" [ngClass]="{'has-error':!form.controls['email'].valid && form.controls['email'].touched}">

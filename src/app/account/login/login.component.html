@@ -7,10 +7,9 @@
     <form [formGroup]="form" (ngSubmit)="submit(form.value)">
       <p>
 
-        <md-input-container class="input-full-width" [ngClass]="{'has-error':!form.controls['email'].valid && form.controls['email'].touched}">
-          <input mdInput type="text" placeholder="Email" [formControl]="form.controls['email']">
-          <div *ngIf="form.controls['email'].hasError('required') && form.controls['email'].touched" class="input-alert">You can't leave this empty.</div>
-          <div *ngIf="form.controls['email'].hasError('email') && form.controls['email'].value" class="input-alert">Email is in wrong format</div>
+        <md-input-container class="input-full-width" [ngClass]="{'has-error':!form.controls['emailorusername'].valid && form.controls['emailorusername'].touched}">
+          <input mdInput type="text" placeholder="Email or Username" [formControl]="form.controls['emailorusername']">
+          <div *ngIf="form.controls['emailorusername'].hasError('required') && form.controls['emailorusername'].touched" class="input-alert">You can't leave this empty.</div>
         </md-input-container>
 
         <md-input-container class="input-full-width" [ngClass]="{'has-error':!form.controls['password'].valid && form.controls['password'].touched}">

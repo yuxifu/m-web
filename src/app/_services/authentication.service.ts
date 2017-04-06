@@ -70,11 +70,39 @@ export class AuthenticationService {
             .catch(this.handleError);
     }
 
-    login(email: string, password: string): Observable<ApiResult> {
+    private loginJson(emailOrUsername: string, password: string): any {
+        if (emailOrUsername.indexOf('@') != -1) {
+            return { email: emailOrUsername, password: password };
+        }
+        else {
+            return { username: emailOrUsername, password: password };
+        }
+    }
+
+    private loginEmail(emailOrUsername: string): string {
+        if (emailOrUsername.indexOf('@') != -1) {
+            return emailOrUsername;
+        }
+        else {
+            return '';
+        }
+    }
+
+    private loginUsername(emailOrUsername: string): string {
+        if (emailOrUsername.indexOf('@') != -1) {
+            var nameParts = emailOrUsername.split("@");
+            return nameParts.length == 2 ? nameParts[0] : '';
+        }
+        else {
+            return emailOrUsername;
+        }
+    }
+
+    login(emailOrUsername: string, password: string): Observable<ApiResult> {
         let result: ApiResult = new ApiResult();
         result.url = this.url.urlLogin;
         return this.http.post(this.url.urlLogin,
-            JSON.stringify({ email: email, password: password }), this.url.jsonRequestOptions)
+            JSON.stringify(this.loginJson(emailOrUsername, password)), this.url.jsonRequestOptions)
             .map((response: Response) => {
                 result.status = response.status;
                 result.statusText = response.statusText;
@@ -82,14 +110,14 @@ export class AuthenticationService {
                 if (token) {
                     // set token property
                     this.token = token;
-                    this.userName = this.emailToUserName(email);
-                    this.email = email;
+                    this.userName = this.loginUsername(emailOrUsername);
+                    this.email = this.loginEmail(emailOrUsername);
 
                     // store username and token in local storage to keep user logged in between page refreshes
                     localStorage.setItem(this.userStorageKey,
                         JSON.stringify({
-                            username: this.emailToUserName(email),
-                            email: email, token: token
+                            username: this.loginUsername(emailOrUsername),
+                            email: this.loginEmail(emailOrUsername), token: token
                         }));
 
                     // return true to indicate successful
@@ -117,11 +145,6 @@ export class AuthenticationService {
 
     isLoggedIn() {
         return localStorage.getItem(this.userStorageKey);
-    }
-
-    private emailToUserName(email: string): string {
-        var nameParts = email.split("@");
-        return nameParts.length == 2 ? nameParts[0] : email;
     }
 
     getCurrentUserDisplayName() {

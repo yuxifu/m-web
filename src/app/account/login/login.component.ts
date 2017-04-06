@@ -21,9 +21,7 @@ export class LoginComponent implements OnInit {
         private fb: FormBuilder) {
         this.form = fb.group({
             // 1st item: default value if any; then validator(s). 
-            'email': [null, Validators.compose([
-                Validators.required,
-                Validators.email])],
+            'emailorusername': [null, Validators.required],
             'password': [null, Validators.compose([
                 Validators.required,
                 Validators.minLength(1),
@@ -44,7 +42,7 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.loading = true;
-        this.authenticationService.login(this.data['email'], this.data['password'])
+        this.authenticationService.login(this.data['emailorusername'], this.data['password'])
             .subscribe(result => {
                 console.log(result);
                 if (result.succeed) {

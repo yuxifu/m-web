@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
     private fb: FormBuilder) {
     this.form = fb.group({
       // 1st item: default value if any; then validator(s). 
-      'username': null,
+      'username': [null, Validators.required],
       'email': [null, Validators.compose([
         Validators.required,
         Validators.email])],
@@ -56,8 +56,8 @@ export class SignupComponent implements OnInit {
         if (result.succeed) {
           this.router.navigate(['/']);
         } else {
-            this.loading = false;
-            this.error = result.errorMessage;
+          this.loading = false;
+          this.error = result.errorMessage;
         }
       }, error => {
         console.log(error);
