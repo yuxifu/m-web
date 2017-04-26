@@ -1,6 +1,13 @@
-# Return My Mattress
+# Angular 2 Comprehensive Starting Project
 
-https://angular.io/docs/ts/latest/tutorial/
+Here is a [Live Demo](https://m-web-1f704.firebaseapp.com) deployed at [Firebase](https://firebase.google.com/)
+
+This project containing code for
+- [Angular Material 2](https://material.angular.io/)
+- [Angular 2 Hero Tutorial](https://angular.io/docs/ts/latest/tutorial/)
+- [THREE.js 3D Graphics](https://threejs.org/)
+- [PrimeNG Library](https://www.primefaces.org/primeng/#/)
+- User Authentication with Django backend at https://yuxi-m-api.herokuapp.com
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.32.3.
 
