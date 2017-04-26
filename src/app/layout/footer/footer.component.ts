@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 })
 export class FooterComponent implements OnInit {
   environmentName = environment.envName;
+  apiRoot = environment.apiRoot;
   
   constructor() { }
 
